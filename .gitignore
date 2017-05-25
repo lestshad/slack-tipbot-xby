@@ -1,0 +1,11 @@
+.snyk
+.vscode
+
+node_modules
+
+npm-debug.log
+.nodemonignore
+
+.DS_Store
+
+.foreverignore
