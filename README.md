@@ -18,8 +18,8 @@ Easily transfer money between team members on your Slack channel.
 
 
 ### Install TipBot
- - `git clone https://github.com/narubyriverlione/slack-tipbot`
- - `cd slack-tipbot`
+ - `git clone https://github.com/lestshad/slack-tipbot-xby.git`
+ - `cd slack-tipbot-xby`
  - `npm install`
 
 
