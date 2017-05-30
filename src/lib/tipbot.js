@@ -95,7 +95,7 @@ TipBot.prototype.tellPrice = function (currency) {
           if (!rate) {
             return reject(tipbotTxt.UnsupportedCurrency)
           } else {
-            return resolve(tipbotTxt.PriceBase + rate.toPrecision(4) + ' ' + currency)
+            return resolve(tipbotTxt.PriceBase + rate.toPrecision(3) + ' ' + currency)
           }
         })
         .catch(err => {
@@ -231,13 +231,18 @@ TipBot.prototype._getPriceRates = function (filename, cb) {
         cb(null, JSON.parse(data))
       })
     } else {
-      request.get('http://coinmarketcap-nexuist.rhcloud.com/api/dash/price', function (err, response, body) {
-        fs.writeFile(filename, body, function (err) {
+      request.get('https://api.coinmarketcap.com/v1/ticker/xtrabytes/?convert=EUR', function (err, response, body) {
+		var prices = JSON.parse(body);
+		var usd = prices[0].price_usd;
+		var eur = prices[0].price_eur;
+		var btc = prices[0].price_btc;
+		var newbody = '{"usd":'+ usd +',"eur":' + eur + ',"btc":' + btc + '}';
+		  
+        fs.writeFile(filename, newbody, function (err) {
           if (err) {
             return cb(err)
           }
-
-          cb(null, JSON.parse(body))
+          cb(null, JSON.parse(newbody))
         })
       })
     }
